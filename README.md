@@ -74,19 +74,30 @@ $logger->warning('My Message', $logContext->toArray());
 
 ## Development
 
+For development Docker is recommended.
 ```bash
 # Build the image
 docker build -t psr3-log-context .
+```
+Once the image has been build it can be started:
+```bash
+# Start the container in the background
+docker run -d -v $(pwd):/app -p 22:22 psr3-log-context
+```
 
-# Start the container
-docker run -v $(pwd):/app -p 22:22 psr3-log-context
+Use this to stop the container later on (`docker stop {value}`).
 
+Next you ssh into the container and navigate to the app-directory.
+
+```bash
 # SSH into the container (pw=test)
 ssh test@localhost
 cd /app
 ```
 
-Stop the running container:
+Stop the running container: `docker stop {value}`
+
+Alternatively you can figure out the value anytime.
 ```bash
 docker ps | grep psr3-log-context
 docker stop {container_id}
