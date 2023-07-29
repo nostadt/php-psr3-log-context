@@ -18,6 +18,14 @@ final class LogContext
         $this->logData = array_values($logData);
     }
 
+    public static function createFromException(\Throwable $exception): self
+    {
+        return new self(
+            new LogData('exception_message', $exception->getMessage()),
+            new LogData('exception_code', (string)$exception->getCode()),
+        );
+    }
+
     /**
      * @return array<string,string|int|bool>
      */

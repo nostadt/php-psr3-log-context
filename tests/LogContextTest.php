@@ -27,4 +27,17 @@ final class LogContextTest extends TestCase
             $subject->toArray()
         );
     }
+
+    public function testCreateFromException(): void
+    {
+        $subject = LogContext::createFromException(new \Exception('The message', 123));
+
+        self::assertSame(
+            [
+                'exception_message' => 'The message',
+                'exception_code' => '123',
+            ],
+            $subject->toArray()
+        );
+    }
 }

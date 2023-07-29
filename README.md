@@ -25,6 +25,23 @@ This package provides classes and an interface to implement easy to understand l
 
 ## Examples
 
+**Use LogContext::createFromException**
+
+This is the recommended way when dealing with Exceptions, unless they implement `LogContextConvertibleInterface`.
+
+```php
+<?php
+
+try {
+    doSomething();
+} catch (\Exception $exception) {
+    $this->logger->warning(
+        $exception->getMessage(),
+        \Nostadt\Psr3LogContext\LogContext::createFromException($exception)->toArray()
+    );
+}
+```
+
 **Use LogContextConvertibleInterface**
 
 This is the recommend way, because it truly simplifies creating the log-context array.
