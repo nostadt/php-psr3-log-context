@@ -1,0 +1,27 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Nostadt\\Psr3LogContext\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Nostadt\\Psr3LogContext\\Tests\\": "tests"
+    }
+  },
+  "description": "Log-Context Made Easy",
+  "homepage": "https://github.com/nostadt/php-psr3-log-context/",
+  "license": "MIT",
+  "name": "nostadt/psr3-log-context",
+  "require": {
+    "php": ">=8.1"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10"
+  },
+  "scripts": {
+    "normalize": "./bin/json-normalize composer.json 2"
+  },
+  "type": "library"
+}
