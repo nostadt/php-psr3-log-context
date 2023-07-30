@@ -40,4 +40,25 @@ final class LogContextTest extends TestCase
             $subject->toArray()
         );
     }
+
+    public function testMergeLogContext(): void
+    {
+        $logContext = new LogContext(
+            new LogData('key1', 'value1')
+        );
+
+        $subject = $logContext->mergeLogContext(
+            new LogContext(
+                new LogData('key2', 'value2')
+            )
+        );
+
+        self::assertSame(
+            [
+                'key1' => 'value1',
+                'key2' => 'value2',
+            ],
+            $subject->toArray()
+        );
+    }
 }

@@ -26,6 +26,13 @@ final class LogContext
         );
     }
 
+    public function mergeLogContext(self $logContext): self
+    {
+        return new self(
+            ...array_merge($this->logData, $logContext->getLogData())
+        );
+    }
+
     /**
      * @return array<string,string|int|bool>
      */
@@ -36,5 +43,13 @@ final class LogContext
             $array[$logData->key] = $logData->value;
         }
         return $array;
+    }
+
+    /**
+     * @return array<int,LogData>
+     */
+    private function getLogData(): array
+    {
+        return $this->logData;
     }
 }

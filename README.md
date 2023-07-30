@@ -73,6 +73,25 @@ $user->name = 'John Doe';
 $logger->warning('My Message', $user->asLogContext()->toArray());
 ```
 
+**Merge multiple LogContexts**
+
+With previous `User`-class in mind we can merge LogContext-objects.
+
+```php
+<?php
+
+use \Nostadt\Psr3LogContext\LogContext;
+
+try {
+    registerUser($user);
+} catch (\Exception $exception) {
+    $this->logger->warning(
+        $exception->getMessage(),
+        LogContext::createFromException($exception)->mergeLogContext($user->asLogContext())->toArray()
+    );
+}
+```
+
 **Create a LogContext from the scratch**
 
 This can be used in situations in which `LogContext` is not available.
