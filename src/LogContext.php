@@ -34,7 +34,7 @@ final class LogContext
     }
 
     /**
-     * @return array<string,string|int|bool>
+     * @return array<string,string>
      */
     public function toArray(): array
     {
