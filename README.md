@@ -1,5 +1,7 @@
 # DRAFT: PSR-3 Log-Context Made Easy
 
+[![CI Process](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml/badge.svg)](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml)
+
 **Preamble**
 
 Especially for larger projects logging is essential. You do want to have all the data you need when looking in the past.
