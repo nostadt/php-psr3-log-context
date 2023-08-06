@@ -1,0 +1,73 @@
+name: CI Process
+on: [ push ]
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-20.04
+    name: "PHPStan"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Switch default PHP Version to 8.1"
+        run: sudo update-alternatives --set php /usr/bin/php8.1
+
+      - name: "Install Composer dependencies"
+        run: composer install
+
+      - name: "PHPStan"
+        run: vendor/bin/phpstan
+
+  composer_normalize:
+    runs-on: ubuntu-20.04
+    name: "composer normalize"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Switch default PHP Version to 8.1"
+        run: sudo update-alternatives --set php /usr/bin/php8.1
+
+      - name: "Install Composer dependencies"
+        run: composer install
+
+      - name: "Normalize"
+        run: composer normalize
+
+  phpunit81:
+    runs-on: ubuntu-20.04
+    name: "PHPUnit with PHP 8.1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "Switch default PHP Version to 8.1"
+        run: sudo update-alternatives --set php /usr/bin/php8.1
+
+      - name: "Print PHP version"
+        run: php --version
+
+      - name: "Install Composer dependencies"
+        run: composer install
+
+      - name: "PHPUnit"
+        run: vendor/bin/phpunit
+
+  phpunit82:
+    runs-on: ubuntu-20.04
+    name: "PHPUnit with PHP 8.2"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Switch default PHP Version to 8.2"
+        run: sudo update-alternatives --set php /usr/bin/php8.2
+
+      - name: "Print PHP version"
+        run: php --version
+
+      - name: "Install Composer dependencies"
+        run: composer install
+
+      - name: "PHPUnit"
+        run: vendor/bin/phpunit
