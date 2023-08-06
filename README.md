@@ -1,4 +1,4 @@
-# DRAFT: PSR-3 Log-Context Made Easy
+# PSR-3 Log-Context Made Easy
 
 [![CI Process](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml/badge.svg)](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml)
 
