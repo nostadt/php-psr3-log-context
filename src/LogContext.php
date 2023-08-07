@@ -20,10 +20,18 @@ final class LogContext
 
     public static function createFromException(\Throwable $exception): self
     {
-        return new self(
+        $logData = [
             new LogData('exception_message', $exception->getMessage()),
             new LogData('exception_code', (string)$exception->getCode()),
-        );
+        ];
+
+        if ($exception->getPrevious() instanceof \Throwable) {
+            $previous = $exception->getPrevious();
+            $logData[] = new LogData('previous_exception_message', $previous->getMessage());
+            $logData[] = new LogData('previous_exception_code', (string)$previous->getCode());
+        }
+
+        return new self(...$logData);
     }
 
     public function mergeLogContext(self $logContext): self

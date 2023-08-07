@@ -28,7 +28,7 @@ final class LogContextTest extends TestCase
         );
     }
 
-    public function testCreateFromException(): void
+    public function testCreateFromExceptionWithoutPreviousException(): void
     {
         $subject = LogContext::createFromException(new \Exception('The message', 123));
 
@@ -36,6 +36,26 @@ final class LogContextTest extends TestCase
             [
                 'exception_message' => 'The message',
                 'exception_code' => '123',
+            ],
+            $subject->toArray()
+        );
+    }
+
+    public function testCreateFromExceptionWithPreviousException(): void
+    {
+        $subject = LogContext::createFromException(
+            new \Exception(
+                'The message', 123,
+                new \Exception( 'Previous message', 456),
+            )
+        );
+
+        self::assertSame(
+            [
+                'exception_message' => 'The message',
+                'exception_code' => '123',
+                'previous_exception_message' => 'Previous message',
+                'previous_exception_code' => '456',
             ],
             $subject->toArray()
         );
