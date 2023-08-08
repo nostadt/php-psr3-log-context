@@ -113,31 +113,37 @@ $logger->warning('My Message', $logContext->toArray());
 
 ## Development
 
-For development Docker is recommended.
-```bash
-# Build the image
-docker build -t psr3-log-context .
-```
-Once the image has been build it can be started:
-```bash
-# Start the container in the background
-docker run -d -v $(pwd):/app -p 22:22 psr3-log-context
-```
+**Requirements:**
 
-Use this to stop the container later on (`docker stop {value}`).
+- [Docker](https://www.docker.com/)
+- [Make](https://www.selflinux.org/selflinux/html/make01.html)
 
-Next you ssh into the container and navigate to the app-directory.
-
+If you start fresh, execute:
 ```bash
-# SSH into the container (pw=test)
-ssh test@localhost
-cd /app
+make init
 ```
 
-Stop the running container: `docker stop {value}`
-
-Alternatively you can figure out the value anytime.
+If you want to clean up, execute:
 ```bash
-docker ps | grep psr3-log-context
-docker stop {container_id}
+make clean
+```
+
+If you are done working, execute:
+```bash
+make stop
+```
+
+If you want to continue working, execute:
+```bash
+make start
+```
+
+If you want to run the tests, execute:
+```bash
+make test
+```
+
+If you want to run the linter, execute:
+```bash
+make lint
 ```
