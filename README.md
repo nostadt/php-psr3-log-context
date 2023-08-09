@@ -121,11 +121,13 @@ $logger->warning('My Message', $logContext->toArray());
 If you start fresh, execute:
 ```bash
 make init
+make start
 ```
 
-If you want to clean up, execute:
+If you want to run code-quality checks, execute:
 ```bash
-make clean
+make test
+make lint
 ```
 
 If you are done working, execute:
@@ -138,12 +140,7 @@ If you want to continue working, execute:
 make start
 ```
 
-If you want to run the tests, execute:
+If you want to clean up the system, execute:
 ```bash
-make test
-```
-
-If you want to run the linter, execute:
-```bash
-make lint
+make clean
 ```
