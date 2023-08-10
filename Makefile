@@ -19,7 +19,7 @@ stop:
 
 .PHONY: test
 test:
-	docker exec psr3-log-context-container vendor/bin/phpunit
+	docker exec psr3-log-context-container tools/phpunit
 
 .PHONY: lint
 lint:

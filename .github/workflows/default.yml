@@ -50,8 +50,8 @@ jobs:
       - name: "Print PHP version"
         run: php --version
 
-      - name: "Install Composer dependencies"
-        run: composer install
+      - name: "Print PHPUnit --version"
+        run: tools/phpunit --version
 
       - name: "PHPUnit"
-        run: vendor/bin/phpunit
+        run: tools/phpunit
