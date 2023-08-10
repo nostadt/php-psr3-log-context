@@ -34,34 +34,18 @@ jobs:
       - name: "Normalize"
         run: composer normalize
 
-  phpunit81:
+  phpunit:
+    strategy:
+      matrix:
+        version: [ /usr/bin/php8.1, /usr/bin/php8.2 ]
     runs-on: ubuntu-20.04
-    name: "PHPUnit with PHP 8.1"
+    name: "PHPUnit with ${{ matrix.version }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: "Switch default PHP Version to 8.1"
-        run: sudo update-alternatives --set php /usr/bin/php8.1
-
-      - name: "Print PHP version"
-        run: php --version
-
-      - name: "Install Composer dependencies"
-        run: composer install
-
-      - name: "PHPUnit"
-        run: vendor/bin/phpunit
-
-  phpunit82:
-    runs-on: ubuntu-20.04
-    name: "PHPUnit with PHP 8.2"
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-
-      - name: "Switch default PHP Version to 8.2"
-        run: sudo update-alternatives --set php /usr/bin/php8.2
+      - name: "Switch default PHP to: ${{ matrix.version }}"
+        run: sudo update-alternatives --set php ${{ matrix.version }}
 
       - name: "Print PHP version"
         run: php --version
