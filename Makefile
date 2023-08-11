@@ -23,4 +23,4 @@ test:
 
 .PHONY: lint
 lint:
-	docker exec psr3-log-context-container vendor/bin/phpstan
+	docker exec psr3-log-context-container tools/phpstan
