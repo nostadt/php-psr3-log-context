@@ -12,11 +12,16 @@ jobs:
       - name: "Switch default PHP Version to 8.1"
         run: sudo update-alternatives --set php /usr/bin/php8.1
 
+      - name: "Print versions"
+        run: |
+          php --version
+          tools/phpstan --version
+
       - name: "Install Composer dependencies"
-        run: composer install
+        run: composer install --no-dev
 
       - name: "PHPStan"
-        run: vendor/bin/phpstan
+        run: tools/phpstan
 
   composer_normalize:
     runs-on: ubuntu-20.04
@@ -47,11 +52,13 @@ jobs:
       - name: "Switch default PHP to: ${{ matrix.version }}"
         run: sudo update-alternatives --set php ${{ matrix.version }}
 
-      - name: "Print PHP version"
-        run: php --version
+      - name: "Print versions"
+        run: |
+          php --version
+          tools/phpunit --version
 
       - name: "Install Composer dependencies"
         run: composer install
 
       - name: "PHPUnit"
-        run: vendor/bin/phpunit
+        run: tools/phpunit
