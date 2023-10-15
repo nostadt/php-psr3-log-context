@@ -32,13 +32,9 @@ final class LogContextTest extends TestCase
     {
         $subject = LogContext::createFromException(new \Exception('The message', 123));
 
-        self::assertSame(
-            [
-                'exception_message' => 'The message',
-                'exception_code' => '123',
-            ],
-            $subject->toArray()
-        );
+        self::assertSame('The message', $subject->toArray()['exception_message']);
+        self::assertSame('123', $subject->toArray()['exception_code']);
+        self::assertTrue(array_key_exists('exception_trace', $subject->toArray()));
     }
 
     public function testCreateFromExceptionWithPreviousException(): void
@@ -50,15 +46,15 @@ final class LogContextTest extends TestCase
             )
         );
 
-        self::assertSame(
-            [
-                'exception_message' => 'The message',
-                'exception_code' => '123',
-                'previous_exception_message' => 'Previous message',
-                'previous_exception_code' => '456',
-            ],
-            $subject->toArray()
-        );
+        // Main
+        self::assertSame('The message', $subject->toArray()['exception_message']);
+        self::assertSame('123', $subject->toArray()['exception_code']);
+        self::assertTrue(array_key_exists('exception_trace', $subject->toArray()));
+
+        // Previous
+        self::assertSame('Previous message', $subject->toArray()['previous_exception_message']);
+        self::assertSame('456', $subject->toArray()['previous_exception_code']);
+        self::assertTrue(array_key_exists('previous_exception_trace', $subject->toArray()));
     }
 
     public function testMergeLogContext(): void
