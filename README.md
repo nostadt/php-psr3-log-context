@@ -1,27 +1,21 @@
-# PSR-3 Log-Context Made Easy
+# PSR-3 Log-Context - Structured PSR-3 Logging
 
 [![CI Process](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml/badge.svg)](https://github.com/nostadt/php-psr3-log-context/actions/workflows/default.yml)
 [![packagist.org](https://img.shields.io/packagist/v/nostadt/psr3-log-context)](https://packagist.org/packages/nostadt/psr3-log-context)
 
-**Preamble**
+## Preamble
 
 Especially for larger projects logging is essential. You do want to have all the data you need when looking in the past.
 Nothing is worse than having a serious issue on the production system but lacking of helpful context information.
+This small package makes it easy to log in a structured manner without cluttering your code.
 
-The goal of this small package is to provide a structure that makes consistent logging easy and to reduce noise coming
-from logging. For me consistent logging means always re-using keys.
+## Available classes and interface
 
-In addition, when creating log context arrays on the fly you don't really know the format the data will be displayed.
-In the worst case Type Errors or Exceptions will be thrown. You certainly want to avoid that.
-
-**How is this package helping?**
-
-This package provides classes and an interface to implement easy to understand log context.
-
-- `LogData`: key=>value to forbid bad values.
-- `LogContext`: Storage for `LogData` and a method to generate an `array`.
-- `LogContextConvertibleInterface`: This interface enforces a method to convert the given object to a `LogContext`.
-
+| Class                                | Description                                                                    |
+|--------------------------------------|--------------------------------------------------------------------------------|
+| `LogData`                            | Key=>Value combo to forbid bad values                                          |
+| `LogContext`                         | Storage for `LogData` and `toArray` method that will be passed as 2nd argument |
+| `LogContextConvertibleInterface`     | Make any custom class LogContext compatible.                                   |
 
 **Further link/s**
 - https://www.php-fig.org/psr/psr-3/
@@ -35,12 +29,14 @@ This is the recommended way when dealing with Exceptions, unless they implement 
 ```php
 <?php
 
+use \Nostadt\Psr3LogContext\LogContext;
+
 try {
     doSomething();
 } catch (\Exception $exception) {
     $this->logger->warning(
         $exception->getMessage(),
-        \Nostadt\Psr3LogContext\LogContext::createFromException($exception)->toArray()
+        LogContext::createFromException($exception)->toArray()
     );
 }
 ```
