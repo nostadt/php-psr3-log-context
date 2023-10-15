@@ -23,12 +23,14 @@ final class LogContext
         $logData = [
             new LogData('exception_message', $exception->getMessage()),
             new LogData('exception_code', (string)$exception->getCode()),
+            new LogData('exception_trace', $exception->getTraceAsString()),
         ];
 
         if ($exception->getPrevious() instanceof \Throwable) {
             $previous = $exception->getPrevious();
             $logData[] = new LogData('previous_exception_message', $previous->getMessage());
             $logData[] = new LogData('previous_exception_code', (string)$previous->getCode());
+            $logData[] = new LogData('previous_exception_trace', $previous->getTraceAsString());
         }
 
         return new self(...$logData);
