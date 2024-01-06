@@ -42,7 +42,10 @@ jobs:
   phpunit:
     strategy:
       matrix:
-        version: [ /usr/bin/php8.1, /usr/bin/php8.2 ]
+        version:
+          - /usr/bin/php8.1
+          - /usr/bin/php8.2
+          - /usr/bin/php8.3
     runs-on: ubuntu-20.04
     name: "PHPUnit with ${{ matrix.version }}"
     steps:
